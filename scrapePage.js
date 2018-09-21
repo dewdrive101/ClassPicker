@@ -51,7 +51,7 @@ function scrapePage() {
                         extraEnd = extraRow.cells[6].innerText;
                         console.log(extraDays, extraStart, extraEnd);
                 }
-                chrome.runtime.sendMessage({ courseNumber, courseName, courseCredits, days, startTime, endTime, seats, extraDays, extraStart, extraEnd}, function (response) {
+                chrome.runtime.sendMessage({courseNumber, courseName, courseCredits, days, startTime, endTime, seats, extraDays, extraStart, extraEnd}, function (response) {
                         console.log(response.farewell);
                 });
         }

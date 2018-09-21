@@ -29,15 +29,34 @@ function writeClassData(message) {
   start = message.startTime;
   end = message.endTime;
   seats = message.seats;
-  console.log(number, name, credits, days, start, end, seats);
-  firebase.database().ref('classes/' + number).set({
-    name: name,
-    credits: credits,
-    days: days,
-    start: start,
-    end: end,
-    seats: seats
-  });
+  estart = message.extraStart;
+  eend = message.extraEnd;
+  edays = message.extraDays;
+  if (estart != "") {
+    console.log(number, name, credits, days, start, end, seats, estart, eend, edays);
+    firebase.database().ref('classes/' + number).set({
+      name: name,
+      credits: credits,
+      days: days,
+      start: start,
+      end: end,
+      seats: seats,
+      estart: estart,
+      eend: eend,
+      edays: edays
+    });
+
+  } else {
+    console.log(number, name, credits, days, start, end, seats);
+    firebase.database().ref('classes/' + number).set({
+      name: name,
+      credits: credits,
+      days: days,
+      start: start,
+      end: end,
+      seats: seats
+    });
+  }
 }
 
 window.onload = function () {
