@@ -36,9 +36,9 @@ function writeClassData(message) {
   console.log(number, name, session, credits, days, start, end, seats, estart, eend, edays);
 
   var ref = firebase.database().ref('classes/' + number);
-  ref.once("value").then(function (snapshot) {
+  ref.child(name).once("value").then(function (snapshot) {
     //if the class is not already in the database
-    if (snapshot.hasChildren()) {
+    if (snapshot.exists()) {
       ref.set({
         name: name,
         credits: credits
