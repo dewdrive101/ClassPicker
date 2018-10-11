@@ -38,7 +38,6 @@ function scrapePage() {
                 var courseLetters = courseInfo.slice(0, 3);
                 var courseNumbers = courseInfo.slice(3, 7);
                 var courseNumber = courseLetters + " " + courseNumbers;
-                console.log(sessionNumber, courseLetters, courseNumbers, courseNumber);
                 //
                 var courseName = document.getElementsByClassName("courseInfo")[i].cells[1].innerText;
                 var courseCredits = document.getElementsByClassName("courseInfo")[i].cells[2].innerText;

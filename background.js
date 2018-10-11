@@ -44,16 +44,16 @@ function writeClassData(message) {
         credits: credits
       });
     }
-  });
-  //saves each individual session
-  firebase.database().ref('classes/' + number + '/' + session).set({
-    days: days,
-    start: start,
-    end: end,
-    seats: seats,
-    estart: estart,
-    eend: eend,
-    edays: edays
+    //saves each individual session
+    firebase.database().ref('classes/' + number + '/' + session).set({
+      days: days,
+      start: start,
+      end: end,
+      seats: seats,
+      estart: estart,
+      eend: eend,
+      edays: edays
+    });
   });
 }
 
