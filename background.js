@@ -27,29 +27,20 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   } else {
     //message from scrapeCams.js
     writeClassData(message);
-    sendResponse({ farewell: "Saved: " + message.courseNumber });
+    sendResponse({ farewell: ("Saved: " + message.courseNumber) });
   }
 });
 
 function writeClassData(message) {
-  number = message.courseNumber;
   var ref = firebase.database().ref('classes')
-  console.log(ref.child(number));
-  if (ref.child(number) == null) {
-    ref.child(number).set({
-      name: message.courseName,
-      credits: message.courseCredits
-    });
-  }
-  //saves each individual session
-  ref.child(number).child(message.sessionNumber).set({
+  ref.child(message.courseNumber).child(message.sessionNumber).set({
     days: message.days,
     start: message.startTime,
-    end: messane.endTime,
+    end: message.endTime,
     seats: message.seats,
     estart: message.extraStart,
-    eend: message.eEnd,
-    edays: message.eDays
+    eend: message.extraEnd,
+    edays: message.extraDays
   });
 }
 
