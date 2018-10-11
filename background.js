@@ -35,10 +35,10 @@ function writeClassData(message) {
   edays = message.extraDays;
   console.log(number, name, session, credits, days, start, end, seats, estart, eend, edays);
 
-  var ref = firebase.database().ref('classes/' + number);
+  var ref = firebase.database().ref('classes/');
   ref.once("value").then(function (snapshot) {
     //if the class is not already in the database
-    if (!snapshot.hasChildren()) {
+    if (!snapshot.hasChild(number)) {
       console.log("Creating Class: " + name);
       ref.set({
         name: name,
@@ -47,7 +47,7 @@ function writeClassData(message) {
     }
     //saves each individual session
     console.log("Creating class session: " + session);
-    firebase.database().ref('classes/' + number + '/' + session).set({
+    ref.child(number).child(session).set({
       days: days,
       start: start,
       end: end,
