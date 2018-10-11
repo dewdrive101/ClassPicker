@@ -35,10 +35,15 @@ function writeClassData(message) {
   edays = message.extraDays;
   console.log(number, name, session, credits, days, start, end, seats, estart, eend, edays);
 
-  //can change this to check if the class already exists, then don't have to save over the same information
-  firebase.database().ref('classes/' + number).set({
-    name: name,
-    credits: credits
+  var ref = firebase.database().ref('classes/' + number);
+  ref.once("value").then(function (snapshot) {
+    //if the class is not already in the database
+    if (snapshot.hasChildren()) {
+      ref.set({
+        name: name,
+        credits: credits
+      });
+    }
   });
   //saves each individual session
   firebase.database().ref('classes/' + number + '/' + session).set({
