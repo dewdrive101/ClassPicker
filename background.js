@@ -14,44 +14,43 @@ function initApp() {
   });
 }
 
-chrome.runtime.onMessage.addListener(
-  function (message, sender, sendResponse) {
-    console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
+  if (message.greeting == "isClass") {
+    //message from scrapeCourses.js
+    console.log(firebase.database().ref('classes/' + message.number));
+    if (firebase.database().ref('classes/' + message.number)) {
+      sendResponse({ farewell: true });
+    } else {
+      sendResponse({ farewell: false });
+    }
+  } else {
+    //message from scrapeCams.js
     writeClassData(message);
-    sendResponse({ farewell: "Saved" });
-  });
+    sendResponse({ farewell: "Saved: " + message.courseNumber });
+  }
+});
 
 function writeClassData(message) {
   number = message.courseNumber;
-  name = message.courseName;
-  session = message.sessionNumber;
-  credits = message.courseCredits;
-  days = message.days;
-  start = message.startTime;
-  end = message.endTime;
-  seats = message.seats;
-  estart = message.extraStart;
-  eend = message.extraEnd;
-  edays = message.extraDays;
-  console.log(number, name, session, credits, days, start, end, seats, estart, eend, edays);
-
-  var ref = firebase.database().ref('classes/')
+  var ref = firebase.database().ref('classes')
+  console.log(ref.child(number));
   if (ref.child(number) == null) {
     ref.child(number).set({
-      name: name,
-      credits: credits
+      name: message.courseName,
+      credits: message.courseCredits
     });
   }
-    //saves each individual session
-    ref.child(number).child(session).set({
-      days: days,
-      start: start,
-      end: end,
-      seats: seats,
-      estart: estart,
-      eend: eend,
-      edays: edays
-    });
+  //saves each individual session
+  ref.child(number).child(message.sessionNumber).set({
+    days: message.days,
+    start: message.startTime,
+    end: messane.endTime,
+    seats: message.seats,
+    estart: message.extraStart,
+    eend: message.eEnd,
+    edays: message.eDays
+  });
 }
 
 
