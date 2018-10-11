@@ -39,14 +39,14 @@ function writeClassData(message) {
   ref.child(name).once("value", function (snapshot) {
     //if the class is not already in the database
     if (!snapshot.exists()) {
-      console.log("Creating Class");
+      console.log("Creating Class: " + name);
       ref.set({
         name: name,
         credits: credits
       });
     }
     //saves each individual session
-    console.log("Creating class session");
+    console.log("Creating class session: " + session);
     firebase.database().ref('classes/' + number + '/' + session).set({
       days: days,
       start: start,
