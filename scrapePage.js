@@ -32,26 +32,35 @@ function loopPages() {
 function scrapePage() {
         coursesLength = document.getElementsByClassName("courseInfo").length;
         for (i = 0; i < coursesLength; i++) {
-                courseNumber = document.getElementsByClassName("courseInfo")[i].cells[0].innerText.split("\n")[0];
-                courseName = document.getElementsByClassName("courseInfo")[i].cells[1].innerText;
-                courseCredits = document.getElementsByClassName("courseInfo")[i].cells[2].innerText;
-                days = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[3].innerText;
-                startTime = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[5].innerText;
-                endTime = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[6].innerText;
-                maxEnrolled = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[7].innerText;
-                currentEnrolled = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[8].innerText;
-                seats = maxEnrolled - currentEnrolled;
-                extraRow = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[4];
-                extraDays = "";
-                extraStart = "";
-                extraEnd = "";
+                //split course info into class number and session
+                var courseInfo = document.getElementsByClassName("courseInfo")[i].cells[0].innerText.split("\n")[0];
+                var sessionNumber = courseInfo.slice(-2);
+                var courseLetters = courseInfo.slice(3);
+                var courseNumbers = courseInfo.slice(3, 7);
+                var courseNumber = courseLetters + " " + courseNumbers;
+                console.log(sessionNumber, courseLetters, courseNumbers, courseNumber);
+                //
+                var courseName = document.getElementsByClassName("courseInfo")[i].cells[1].innerText;
+                var courseCredits = document.getElementsByClassName("courseInfo")[i].cells[2].innerText;
+                var days = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[3].innerText;
+                var startTime = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[5].innerText;
+                var endTime = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[6].innerText;
+                //calc seats left
+                var maxEnrolled = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[7].innerText;
+                var currentEnrolled = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[2].cells[8].innerText;
+                var seats = maxEnrolled - currentEnrolled;
+                //
+                var extraRow = document.getElementsByClassName("Portal_Group_Table nested")[i].childNodes[1].childNodes[4];
+                var extraDays = "";
+                var extraStart = "";
+                var extraEnd = "";
                 if (extraRow != undefined) {
                         extraDays = extraRow.cells[3].innerText;
                         extraStart = extraRow.cells[5].innerText;
                         extraEnd = extraRow.cells[6].innerText;
                         console.log(extraDays, extraStart, extraEnd);
                 }
-                chrome.runtime.sendMessage({courseNumber, courseName, courseCredits, days, startTime, endTime, seats, extraDays, extraStart, extraEnd}, function (response) {
+                chrome.runtime.sendMessage({courseNumber, courseName, sessionNumber, courseCredits, days, startTime, endTime, seats, extraDays, extraStart, extraEnd}, function (response) {
                         console.log(response.farewell);
                 });
         }

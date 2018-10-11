@@ -24,6 +24,7 @@ chrome.runtime.onMessage.addListener(
 function writeClassData(message) {
   number = message.courseNumber;
   name = message.courseName;
+  session = message.sessionNumber;
   credits = message.courseCredits;
   days = message.days;
   start = message.startTime;
@@ -32,32 +33,25 @@ function writeClassData(message) {
   estart = message.extraStart;
   eend = message.extraEnd;
   edays = message.extraDays;
-  if (estart != "") {
-    console.log(number, name, credits, days, start, end, seats, estart, eend, edays);
-    firebase.database().ref('classes/' + number).set({
-      name: name,
-      credits: credits,
-      days: days,
-      start: start,
-      end: end,
-      seats: seats,
-      estart: estart,
-      eend: eend,
-      edays: edays
-    });
+  console.log(number, name, session, credits, days, start, end, seats, estart, eend, edays);
 
-  } else {
-    console.log(number, name, credits, days, start, end, seats);
-    firebase.database().ref('classes/' + number).set({
-      name: name,
-      credits: credits,
-      days: days,
-      start: start,
-      end: end,
-      seats: seats
-    });
-  }
+  //can change this to check if the class already exists, then don't have to save over the same information
+  firebase.database().ref('classes/' + number).set({
+    name: name,
+    credits: credits
+  });
+  //saves each individual session
+  firebase.database().ref('classes/' + number + '/' + session).set({
+    days: days,
+    start: start,
+    end: end,
+    seats: seats,
+    estart: estart,
+    eend: eend,
+    edays: edays
+  });
 }
+
 
 window.onload = function () {
   initApp();
