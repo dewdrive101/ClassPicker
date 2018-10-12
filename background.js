@@ -15,15 +15,19 @@ function initApp() {
 }
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
+  //console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
   if (message.greeting == "isClass") {
-    //message from scrapeCourses.js
-    console.log(firebase.database().ref('classes/' + message.number));
-    if (firebase.database().ref('classes/' + message.number)) {
-      sendResponse({ farewell: true });
-    } else {
-      sendResponse({ farewell: false });
-    }
+    //message from scrapeCourses.js, check if the class exists
+    var ref = firebase.database().ref('classes');
+    ref.child(message.number).once('value', function (snapshot) {
+      console.log(message.number + " exists? " + snapshot.exists());
+      //this commented out code doesn't work, sends undefined message for some reason
+      //sendResponse({ farewell: snapshot.exists() });
+      if (snapshot.exists())
+        sendResponse({farewell: "hey"});
+      else
+        sendResponse({farewell: "hey"});
+    });
   } else {
     //message from scrapeCams.js
     writeClassData(message);
