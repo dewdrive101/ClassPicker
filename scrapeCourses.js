@@ -21,12 +21,13 @@ function checkClass() {
                 //gets the text of each box
                 var textArray = infoBox.innerText.split(/\r?\n/);
                 var number = textArray[0].slice(0, 8);
+
                 //check if the number is already in the database. if yes the class exists on cams
-                chrome.runtime.sendMessage({ greeting: "isClass", number }, function (response) {
-                    console.log(response);
-                    console.log(number + ": " + response.farewell);
+                chrome.runtime.sendMessage({ greeting: "isClass", number }, function (message) {
+                    console.log(message);
+                    console.log(number + ": " + message);
 //                    console.log(i + ": " + number + ": " + response.farewell);
-                    if (response.farewell) {
+                    if (message.farewell) {
                         //Class exists on cams
                         gatherClassInfo();
                     }
