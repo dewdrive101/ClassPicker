@@ -14,30 +14,27 @@ function initApp() {
   });
 }
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+//simple listener, response is not important and not "needed"
+chrome.runtime.onMessage.addListener(function (message, sendResponse) {
   console.log(message);
-  console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
-  if (message.greeting == "isClass") {
-    //message from scrapeCourses.js, check if the class exists
+  //message from scrapeCams.js
+  writeClassData(message);
+  sendResponse({ farewell: ("Saved: " + message.courseNumber) });
+});
+
+//message from scrapeCourses.js, check if the class exists
+//open a continuos connection because answer is important and
+//required for code to continue
+chrome.runtime.onConnect.addListener(function (port) {
+  console.assert(port.name == "isClass");
+  port.onMessage.addListener(function (message) {
+    console.log(message);
     var ref = firebase.database().ref('classes');
     ref.child(message.number).once('value', function (snapshot) {
       console.log(message.number + " exists? " + snapshot.exists());
-      //this commented out code doesn't work, sends undefined message for some reason
-      //sendResponse({ farewell: snapshot.exists() });
-      if (snapshot.exists()) {
-        console.log("Sending Message: True");
-        sendResponse({ farewell: ("Saved: " + message.number) });
-      }
-      else {
-        console.log("Sending Message: False");
-        sendResponse({ farewell: ("Saved: " + message.number) });
-      }
+      port.postMessage({ answer: (snapshot.exists()) });
     });
-  } else {
-    //message from scrapeCams.js
-    writeClassData(message);
-    sendResponse({ farewell: ("Saved: " + message.courseNumber) });
-  }
+  });
 });
 
 function writeClassData(message) {
@@ -57,3 +54,8 @@ function writeClassData(message) {
 window.onload = function () {
   initApp();
 };
+
+/* TODO:
+scrapeCams.js add different class for labs, labs currently overwrite normal classes
+
+*/
