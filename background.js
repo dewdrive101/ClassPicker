@@ -16,10 +16,10 @@ function initApp() {
 
 //simple listener, response is not important and not "needed"
 chrome.runtime.onMessage.addListener(function (message, sendResponse) {
-  console.log(message);
   if (message.greeting == "appendClass") {
     //message from scrapeCourses.js
     appendClassData(message);
+    console.log("Sending response");
     sendResponse({ farewell: ("Append: " + message.number) });
   } else {
     //message from scrapeCams.js
@@ -58,12 +58,12 @@ function writeClassData(message) {
 
 function appendClassData(message) {
   var ref = firebase.database().ref('classes')
-  ref.child(message.number).set({
-    name: Name,
-    credits: Credits,
-    prerequisites: Prerequisites,
-    corequisiteOrPrerequisite: CorequisiteOrPrerequisite,
-    corequisite: Corequisite
+  ref.child(message.number).child("common").set({
+    name: message.Name,
+    credits: message.Credits,
+    prerequisites: message.Prerequisites,
+    corequisiteOrPrerequisite: message.CorequisiteOrPrerequisite,
+    corequisite: message.Corequisite
   });
 }
 
@@ -73,5 +73,6 @@ window.onload = function () {
 
 /* TODO:
 scrapeCams.js add different class for labs, labs currently overwrite normal classes
-
+scrapeCourses.js, bunch of differently formatted requisites need
+                  to be systematically made the same
 */

@@ -53,9 +53,9 @@ function gatherClassInfo(i) {
             var number = numberName[0].trim();
             var Name = numberName[1].trim();
             var Credits = textArray[1].slice(9, 10);
-            var Prerequisites;
-            var CorequisiteOrPrerequisite;
-            var Corequisite;
+            var Prerequisites = "none";
+            var CorequisiteOrPrerequisite = "none";
+            var Corequisite = "none";
 
             for (k = 3; k < textArray.length - 1; k++) {
                 var line = textArray[3].split(": ");
@@ -69,8 +69,8 @@ function gatherClassInfo(i) {
                     Corequisite = line[1];
                 }
             }
-            console.log(credits);
             chrome.runtime.sendMessage({ greeting: "appendClass", number, Name, Credits, Prerequisites, CorequisiteOrPrerequisite, Corequisite }, function (response) {
+                console.log(response.farewell);
             });
         }
     }
