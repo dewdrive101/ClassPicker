@@ -24,14 +24,6 @@
     },
     {
       "matches": [
-        "http://catalog.floridapoly.edu/content.php?catoid=12&navoid=548"
-      ],
-      "js": [
-        "scrapeCourses.js"
-      ]
-    },
-    {
-      "matches": [
         "https://cams.floridapoly.org/student/cePortalMasterDetail.asp?id=*"
       ],
       "js": [

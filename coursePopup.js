@@ -4,6 +4,21 @@ var name = document.getElementsByClassName("center")[0].tBodies[0].children[0].c
 var credits = document.getElementsByClassName("center")[0].tBodies[0].children[0].children[5].innerText;
 var number = department + " " + courseId;
 console.log(number, name, credits);
-var coreq = document.body.children[5].children[1].innerText;
-//closes window
-//document.getElementsByClassName("floatRight button")[0].click();
+var coreq = "none";
+var prereq = "none";
+var length = document.body.children.length;
+// < 6 no reqs, 8 both co and pre reqs
+if (length > 6) {
+    if (length < 8) {
+        if (document.body.children[5].children[1])
+            coreq = document.body.children[5].children[1].innerText;
+        if (document.body.children[6].children[1])
+            prereq = document.body.children[6].children[1].innerText;
+    } else {
+        coreq = document.body.children[5].children[1].innerText;
+        prereq = document.body.children[6].children[1].innerText;
+    }
+}
+chrome.runtime.sendMessage({ greeting: "appendClass", number, name, credits, coreq, prereq }, function (response) {
+});
+document.getElementsByClassName("floatRight button")[0].click();

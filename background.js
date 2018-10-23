@@ -15,32 +15,16 @@ function initApp() {
 }
 
 //simple listener, response is not important and not "needed"
-chrome.runtime.onMessage.addListener(function (message, sendResponse) {
+chrome.runtime.onMessage.addListener(function (message) {
+  console.log(message);
   if (message.greeting == "appendClass") {
     //message from scrapeCourses.js
     appendClassData(message);
     console.log("Sending response");
-    sendResponse({ farewell: ("Append: " + message.number) });
   } else {
     //message from scrapeCams.js
     writeClassData(message);
-    sendResponse({ farewell: ("Saved: " + message.courseNumber) });
   }
-});
-
-//message from scrapeCourses.js, check if the class exists
-//open a continuos connection because answer is important and
-//required for code to continue
-chrome.runtime.onConnect.addListener(function (port) {
-  console.assert(port.name == "isClass");
-  port.onMessage.addListener(function (message) {
-    console.log(message);
-    var ref = firebase.database().ref('classes');
-    ref.child(message.number).once('value', function (snapshot) {
-      console.log(message.number + " exists? " + snapshot.exists());
-      port.postMessage({ answer: (snapshot.exists()) });
-    });
-  });
 });
 
 function writeClassData(message) {
@@ -59,11 +43,10 @@ function writeClassData(message) {
 function appendClassData(message) {
   var ref = firebase.database().ref('classes')
   ref.child(message.number).child("common").set({
-    name: message.Name,
-    credits: message.Credits,
-    prerequisites: message.Prerequisites,
-    corequisiteOrPrerequisite: message.CorequisiteOrPrerequisite,
-    corequisite: message.Corequisite
+    name: message.name,
+    credits: message.credits,
+    prerequisites: message.prereq,
+    corequisite: message.coreq
   });
 }
 
