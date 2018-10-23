@@ -17,9 +17,15 @@ function initApp() {
 //simple listener, response is not important and not "needed"
 chrome.runtime.onMessage.addListener(function (message, sendResponse) {
   console.log(message);
-  //message from scrapeCams.js
-  writeClassData(message);
-  sendResponse({ farewell: ("Saved: " + message.courseNumber) });
+  if (message.greeting == "appendClass") {
+    //message from scrapeCourses.js
+    appendClassData(message);
+    sendResponse({ farewell: ("Append: " + message.number) });
+  } else {
+    //message from scrapeCams.js
+    writeClassData(message);
+    sendResponse({ farewell: ("Saved: " + message.courseNumber) });
+  }
 });
 
 //message from scrapeCourses.js, check if the class exists
@@ -50,6 +56,16 @@ function writeClassData(message) {
   });
 }
 
+function appendClassData(message) {
+  var ref = firebase.database().ref('classes')
+  ref.child(message.number).set({
+    name: Name,
+    credits: Credits,
+    prerequisites: Prerequisites,
+    corequisiteOrPrerequisite: CorequisiteOrPrerequisite,
+    corequisite: Corequisite
+  });
+}
 
 window.onload = function () {
   initApp();
