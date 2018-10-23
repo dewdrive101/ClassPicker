@@ -29,6 +29,14 @@
       "js": [
         "scrapeCourses.js"
       ]
+    },
+    {
+      "matches": [
+        "https://cams.floridapoly.org/student/cePortalMasterDetail.asp?id=*"
+      ],
+      "js": [
+        "coursePopup.js"
+      ]
     }
   ],
   "permissions": [
