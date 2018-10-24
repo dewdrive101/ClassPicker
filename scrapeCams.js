@@ -1,13 +1,18 @@
-var button = document.createElement("button");
-button.value = "Gather class information";
-button.id = "gather-classes-button";
-document.getElementsByClassName("Portal_Grid_Pager")[0].appendChild(button);
-document.getElementById('gather-classes-button').addEventListener('click', loopPages, false);
 var num = document.getElementsByClassName("courseInfo").length;
 var i = 0;
 var myVar;
+var currentPage = document.getElementsByClassName("Portal_Grid_Pager")[0].innerText.slice(50, 51);
+if (currentPage == 1) {
+        var button = document.createElement("button");
+        button.value = "Gather class information";
+        button.id = "gather-classes-button";
+        document.getElementsByClassName("Portal_Grid_Pager")[0].appendChild(button);
+        document.getElementById('gather-classes-button').addEventListener('click', loopPages, false);
+} else {
+        loopPages();
+}
 function loopPages() {
-        myVar = setInterval(scrapePage, 2000);
+        myVar = setInterval(scrapePage, 1000);
 }
 
 function scrapePage() {
@@ -15,9 +20,8 @@ function scrapePage() {
         //split course info into class number and session
         var courseInfo = document.getElementsByClassName("courseInfo")[i].cells[0].innerText.split("\n")[0];
         var sessionNumber = courseInfo.slice(-2);
-        var courseLetters = courseInfo.slice(0, 3);
-        var courseNumbers = courseInfo.slice(3, 7);
-        var courseNumber = courseLetters + " " + courseNumbers;
+        var courseNumber = courseInfo.slice(0, -2);
+        console.log(courseNumber);
         console.log("Gathering information for: " + i);
         var courseName = document.getElementsByClassName("courseInfo")[i].cells[1].innerText;
         var courseCredits = document.getElementsByClassName("courseInfo")[i].cells[2].innerText;
@@ -43,5 +47,15 @@ function scrapePage() {
         console.log(num, i);
         if (num == i) {
                 clearTimeout(myVar);
+                nextPage();
         }
+}
+
+function nextPage() {
+        //clicks on the next page
+        console.log(currentPage + 1);
+        document.getElementById('idPage').value = currentPage + 1;
+        document.forms['OptionsForm'].submit();
+        //this works directly on the page, can't figure out calling it from code
+        //displayNewPage(currentPage + 1);
 }

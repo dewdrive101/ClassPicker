@@ -55,7 +55,8 @@ window.onload = function () {
 };
 
 /* TODO:
-scrapeCams.js add different class for labs, labs currently overwrite normal classes
-scrapeCourses.js, bunch of differently formatted requisites need
-                  to be systematically made the same
+scrapeCams.js
+
+coursePopup.js
+  only read the window and close it when scraping, otherwise leave it alone
 */
