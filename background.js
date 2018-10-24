@@ -27,6 +27,21 @@ chrome.runtime.onMessage.addListener(function (message) {
   }
 });
 
+//message from scrapeCourses.js, check if the class exists
+//open a continuos connection because answer is important and
+//required for code to continue
+chrome.runtime.onConnect.addListener(function (port) {
+  console.assert(port.name == "isClass");
+  port.onMessage.addListener(function (message) {
+    console.log(message);
+    var ref = firebase.database().ref('classes');
+    ref.child(message.courseNumber).child("common").once('value', function (snapshot) {
+      console.log(message.courseNumber + " exists? " + snapshot.exists());
+      port.postMessage({ answer: (snapshot.exists()) });
+    });
+  });
+});
+
 function writeClassData(message) {
   var ref = firebase.database().ref('classes')
   ref.child(message.courseNumber).child(message.sessionNumber).set({
