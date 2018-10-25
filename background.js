@@ -21,7 +21,8 @@ chrome.runtime.onMessage.addListener(function (message) {
     //message from scrapeCourses.js
     appendClassData(message);
     console.log("Sending response");
-  } else {
+  }
+  else {
     //message from scrapeCams.js
     writeClassData(message);
   }
@@ -35,9 +36,12 @@ chrome.runtime.onConnect.addListener(function (port) {
   port.onMessage.addListener(function (message) {
     console.log(message);
     var ref = firebase.database().ref('classes');
-    ref.child(message.courseNumber).child("common").once('value', function (snapshot) {
-      console.log(message.courseNumber + " exists? " + snapshot.exists());
-      port.postMessage({ answer: (snapshot.exists()) });
+    ref.child(message.courseNumber).once('value', function (snapshot) {
+      console.log(message.courseNumber + " common exists? " + snapshot.child("common").exists());
+      console.log(message.courseNumber + " session exists? " + snapshot.child(message.sessionNumber).exists());
+      var common = snapshot.child("common").exists();
+      var session = snapshot.child(message.sessionNumber).exists();
+      port.postMessage({ common: common, session: session });
     });
   });
 });
@@ -63,6 +67,10 @@ function appendClassData(message) {
     prerequisites: message.prereq,
     corequisite: message.coreq
   });
+  chrome.tabs.query({ active: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { greeting: "continue" }, function (response) {
+    });
+  });
 }
 
 window.onload = function () {
@@ -73,5 +81,5 @@ window.onload = function () {
 scrapeCams.js
 
 coursePopup.js
-  only read the window and close it when scraping, otherwise leave it alone
+
 */
