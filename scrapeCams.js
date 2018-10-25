@@ -62,9 +62,9 @@ function scrapePage(i) {
 
 function nextPage() {
         //loads the next page
-        /*
+        console.log(currentPage);
         console.log(Number(currentPage) + 1);
-        document.getElementById('idPage').value = Number(currentPage) + 1;
+       /* document.getElementById('idPage').value = Number(currentPage) + 1;
         document.forms['OptionsForm'].submit();
         */
 }
