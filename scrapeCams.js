@@ -1,6 +1,12 @@
 var num = document.getElementsByClassName("courseInfo").length;
 var i = 0;
-var currentPage = document.getElementsByClassName("Portal_Grid_Pager")[0].innerText.slice(50, 52).trim();
+var array = document.getElementsByClassName("Portal_Grid_Pager")[0].innerText.split("");
+array.forEach(function (value, index, array) {
+        if (array[index] == "#") {
+                currentPage = (array[index + 1] + array[index + 2]).trim();
+
+        }
+});
 if (currentPage == 1) {
         var button = document.createElement("button");
         button.value = "Gather class information";
@@ -62,11 +68,9 @@ function scrapePage(i) {
 
 function nextPage() {
         //loads the next page
-        console.log(currentPage);
         console.log(Number(currentPage) + 1);
-       /* document.getElementById('idPage').value = Number(currentPage) + 1;
+        document.getElementById('idPage').value = Number(currentPage) + 1;
         document.forms['OptionsForm'].submit();
-        */
 }
 
 //simple listener, response is not important and not "needed"

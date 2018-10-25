@@ -81,6 +81,7 @@ window.onload = function () {
 };
 
 /* TODO:
+//make it only run on button click, currently can't do anything without setting it off
 scrapeCams.js
 
 coursePopup.js

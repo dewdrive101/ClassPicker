@@ -5,25 +5,20 @@ var name = document.getElementsByClassName("center")[0].tBodies[0].children[0].c
 var credits = document.getElementsByClassName("center")[0].tBodies[0].children[0].children[5].innerText;
 var number = department + courseId + type;
 console.log(number, name, credits);
+
 var coreq = "none";
 var prereq = "none";
 var length = document.body.children.length;
-// < 6 no reqs, 8 both co and pre reqs
-if (length > 6) {
-    if (length < 8) {
-        if (document.body.children[5].children[1])
-            coreq = document.body.children[5].children[1].innerText;
-        else 
-            prereq = document.body.children[6].children[1].innerText;
-    } else {
-        if (length == 8) {
-            coreq = document.body.children[5].children[1].innerText;
-            prereq = document.body.children[7].children[1].innerText;
-        } else {
-            prereq = document.body.children[6].children[1].innerText;
-        }
+for (i = 0; i < length; i++) {
+    child = document.body.children[i]
+    if (child.children[0]) {
+        if (child.children[0].innerText.split(" ")[0] == "Prerequisite")
+            prereq = child.children[1].innerText;
+        if (child.children[0].innerText.split(" ")[0] == "Corequisite") 
+            coreq = child.children[1].innerText;
     }
 }
+
 chrome.runtime.sendMessage({ greeting: "appendClass", number, name, credits, coreq, prereq }, function (response) {
 });
 document.getElementsByClassName("floatRight button")[0].click();
