@@ -13,24 +13,6 @@
   "browser_action": {
     "default_icon": "icons/icon.png"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "https://cams.floridapoly.org/student/cePortalOffering.asp"
-      ],
-      "js": [
-        "scrapeCams.js"
-      ]
-    },
-    {
-      "matches": [
-        "https://cams.floridapoly.org/student/cePortalMasterDetail.asp?id=*"
-      ],
-      "js": [
-        "coursePopup.js"
-      ]
-    }
-  ],
   "permissions": [
     "identity",
     "activeTab",
