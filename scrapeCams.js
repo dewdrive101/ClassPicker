@@ -1,6 +1,5 @@
 var num = document.getElementsByClassName("courseInfo").length;
 var i = 0;
-//var myVar;
 var currentPage = document.getElementsByClassName("Portal_Grid_Pager")[0].innerText.slice(50, 52).trim();
 if (currentPage == 1) {
         var button = document.createElement("button");
@@ -25,15 +24,12 @@ function scrapePage(i) {
                 console.log(i, courseNumber);
                 //open the class page if it doesn't exist yet
                 var port = chrome.runtime.connect({ name: "isClass" });
-                port.postMessage({ greeting: "isClass", courseNumber, sessionNumber });
+                port.postMessage({ greeting: "isClass", courseNumber, sessionNumber, i });
                 port.onMessage.addListener(function (response) {
                         console.log(response);
                         if (!response.common) {
                                 document.getElementsByClassName("Portal_Group_SubHeader2 courseName")[i].children[0].click();
-                                //wait 1.3 seconds before running the next session of code
-                                //setTimeout(function () {
-                                //        scrapePage(i + 1);
-                                //}, 1300);
+                                //wait for the background page to call the next scrapePage()
                         } else {
                                 scrapePage(i + 1);
                         }
@@ -66,16 +62,15 @@ function scrapePage(i) {
 
 function nextPage() {
         //loads the next page
+        /*
         console.log(Number(currentPage) + 1);
         document.getElementById('idPage').value = Number(currentPage) + 1;
         document.forms['OptionsForm'].submit();
+        */
 }
-
-
-//can get rid of isSession if i can get "i" to be passed in as "i" isn't saved and starts at 0
 
 //simple listener, response is not important and not "needed"
 chrome.runtime.onMessage.addListener(function (message) {
-        console.log(i, message);
-        scrapePage(i + 1);
+        console.log(message.i, message);
+        scrapePage(message.i + 1);
 });

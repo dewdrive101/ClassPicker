@@ -13,11 +13,15 @@ if (length > 6) {
     if (length < 8) {
         if (document.body.children[5].children[1])
             coreq = document.body.children[5].children[1].innerText;
-        if (document.body.children[6].children[1])
+        else 
             prereq = document.body.children[6].children[1].innerText;
     } else {
-        coreq = document.body.children[5].children[1].innerText;
-        prereq = document.body.children[7].children[1].innerText;
+        if (length == 8) {
+            coreq = document.body.children[5].children[1].innerText;
+            prereq = document.body.children[7].children[1].innerText;
+        } else {
+            prereq = document.body.children[6].children[1].innerText;
+        }
     }
 }
 chrome.runtime.sendMessage({ greeting: "appendClass", number, name, credits, coreq, prereq }, function (response) {

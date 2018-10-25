@@ -14,6 +14,8 @@ function initApp() {
   });
 }
 
+var i;
+
 //simple listener, response is not important and not "needed"
 chrome.runtime.onMessage.addListener(function (message) {
   console.log(message);
@@ -35,6 +37,7 @@ chrome.runtime.onConnect.addListener(function (port) {
   console.assert(port.name == "isClass");
   port.onMessage.addListener(function (message) {
     console.log(message);
+    i = message.i;
     var ref = firebase.database().ref('classes');
     ref.child(message.courseNumber).once('value', function (snapshot) {
       console.log(message.courseNumber + " common exists? " + snapshot.child("common").exists());
@@ -68,7 +71,7 @@ function appendClassData(message) {
     corequisite: message.coreq
   });
   chrome.tabs.query({ active: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { greeting: "continue" }, function (response) {
+    chrome.tabs.sendMessage(tabs[0].id, { greeting: "continue", i }, function (response) {
     });
   });
 }
