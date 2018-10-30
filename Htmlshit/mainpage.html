@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<title>
+			ClassPicker	
+		</title>
+		
+		<link rel="stylesheet" href="stylesheet.css"
+			type="text/css"/>
+			
+<style>
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown2 {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown2:hover .dropdown-content2 {
+    display: block;
+}
+</style>
+
+
+	</head>
+	<body>
+		<div class ="wrapper">
+			<div class="heading">
+				<h1> Class Picker </h1>
+			</div>
+							
+			<div class="navigation">
+				<button type="button">
+					<a href = "mainpage.html">Home</a>
+				</button>
+				<button class="dropdown">
+  					<span>Course Catalogs</span>
+ 					 	<div class="dropdown-content">
+    							<a href = "ComputerScience.html">Computer Science</a>
+							<a href = "http://catalog.floridapoly.edu/content.php?catoid=12&navoid=626">Computer Engineering</a>
+							<a href = "http://catalog.floridapoly.edu/content.php?catoid=12&navoid=626">Electrical Engineering</a>
+							<a href = "http://catalog.floridapoly.edu/content.php?catoid=12&navoid=627">Data Science</a>
+							<a href = "http://catalog.floridapoly.edu/content.php?catoid=12&navoid=627">Business Analytics</a>
+							<a href = "http://catalog.floridapoly.edu/content.php?catoid=12&navoid=625">Mechanical Engineering</a>
+ 						 </div>
+				</button>
+				<button class="dropdown2">
+  					<span>My Schedule</span>
+ 					 	<div class="dropdown-content2">
+    							<a href = "MySchedule.html">My Schedule</a>
+							<p2>Edit My Schedule</p2>
+ 						 </div>
+				</button>
+			</div>
+			<div class="content">
+				Main Content IDK what you guys want here
+			</div>
+			<div class="login">
+				<form>
+  					Username:<br>
+  					<input type="text" name="username"><br>
+  					Password:<br>
+  					<input type="password" name="password">
+					<input type="submit" value="Submit">
+					<input type="reset">
+					</form>
+
+			</div>
+
+			<div class="Side Bar">
+				Additional Info
+				whatever other stuff you want lemme know
+			</div>
+			<div class="footer">
+				Software Engineering Project
+			</div>
+
+
+		</div>	
+	</body>
+
+</html>
