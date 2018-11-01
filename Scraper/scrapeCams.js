@@ -78,3 +78,12 @@ chrome.runtime.onMessage.addListener(function (message) {
         console.log(message.i, message);
         scrapePage(message.i + 1);
 });
+
+/*
+var button = document.createElement("button");
+button.value = "Add Multiple Courses";
+button.id = "gather-classes";
+document.getElementsByClassName("col-md-offset-4 col-md-6")[0].appendChild(button);
+document.getElementById('add-classes-button').addEventListener('click', openSelections, false);
+document.getElementsByClassName("select2-result-label")[0].innerText;
+*/
