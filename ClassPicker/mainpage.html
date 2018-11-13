@@ -84,17 +84,18 @@
 <h2>The datalist Element</h2>
 <p>The datalist element specifies a list of pre-defined options for an input element.</p>
 
-<form action="/action_page.php">
-  <input list="browsers" name="browser">
-  <datalist id="browsers">
-    <option value="Internet Explorer">
-    <option value="Firefox">
-    <option value="Chrome">
-    <option value="Opera">
-    <option value="Safari">
-  </datalist>
-  <input type="submit">
-</form>
+<div class="content">
+	Major:
+	<select id="majorList">
+		<option value="Computer Science">Computer Science</option>
+	</select>
+	<form action="/action_page.php" method="get">
+		<input name="firstname" type="text">
+		<input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+		<input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car<br>
+		<input type="submit" value="Submit">
+	</form>
+</div>
 
 <p> </p>
 
