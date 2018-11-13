@@ -73,6 +73,7 @@ function updateMajor() {
     database.ref('users/' + user.uid).set({
         major: document.getElementById('majorList').value
     });
+    document.getElementById("computer_science_catalog").visibility = "visible"
 }
 
 window.onload = function () {
