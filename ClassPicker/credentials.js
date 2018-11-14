@@ -7,7 +7,7 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 function initApp() {
-    document.getElementsByClassName("quickstart-user-details-container")[0].style.visibility = "hidden";
+    document.getElementById("content")[0].style.visibility = "hidden";
     console.log("Initializing credentials page");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -74,7 +74,7 @@ function updateMajor() {
         major: document.getElementById('majorList').value
     });
     console.log("Changing visibility");
-    document.getElementById("computer_science_catalog").visibility = "visible";
+    document.getElementById("computer_science_catalog").style.visibility = "visible";
 }
 
 window.onload = function () {
