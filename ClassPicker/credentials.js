@@ -53,6 +53,10 @@ function loggedIn(user) {
     document.getElementById('majorList').addEventListener("change", function(){
         updateMajor();
     });
+    //added
+    document.getElementById('Submit').addEventListener("click", function(){
+        updateCourses();
+    });
 }
 
 function loadUserData(userId) {
@@ -76,6 +80,27 @@ function updateMajor() {
     console.log("Changing visibility");
     document.getElementById("computer_science_catalog").style.visibility = "visible";
 }
+
+
+function updateCourses(){
+    var count = 0;
+    var inputElements = document.getElementsByTagName("input");
+    consol.log("saving user data")
+    var user = firebase.auth().currentUser;
+    
+    for(var i = 0; i<inputElements; i++){
+        if(inputElements[i].type === "checkbox"){
+            count++;
+        }
+    }
+
+    for(var i = 0; i < count; i++){
+        database.ref('users/' + user.uid + "Classes").set({
+            Classes: document.querySelectorAll("input[type='checkbox']")[i].value
+        });
+    }
+}
+
 
 window.onload = function () {
     initApp();
