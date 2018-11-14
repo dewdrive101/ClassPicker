@@ -7,18 +7,18 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 function initApp() {
-    document.getElementById("content")[0].style.visibility = "hidden";
-    console.log("Initializing credentials page");
+    //document.getElementById("majorSelection").style.visibility = "hidden";
+    console.log("Initializing mainpage");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             loggedIn(user);
         } else {
-            document.getElementById('quickstart-button').textContent = 'Sign-in with Google';
-            document.getElementsByClassName("quickstart-user-details-container")[0].style.visibility = "hidden";
+            document.getElementById('sign-in-button').textContent = 'Sign-in with Google';
+            //document.getElementsByClassName("logIn").style.visibility = "hidden";
         }
-        document.getElementById('quickstart-button').disabled = false;
+        document.getElementById('sign-in-button').disabled = false;
     });
-    document.getElementById('quickstart-button').addEventListener('click', startSignIn, false);
+    document.getElementById('sign-in-button').addEventListener('click', startSignIn, false);
 }
 
 function startAuth(interactive) {
@@ -37,7 +37,8 @@ function startAuth(interactive) {
 }
 
 function startSignIn() {
-    document.getElementById('quickstart-button').disabled = true;
+    console.log("Starting sign in");
+    document.getElementById('sign-in-button').disabled = true;
     if (firebase.auth().currentUser) {
         firebase.auth().signOut();
     } else {
@@ -46,20 +47,20 @@ function startSignIn() {
 }
 
 function loggedIn(user) {
-    document.getElementsByClassName("quickstart-user-details-container")[0].style.visibility = "visible";
-    var classes = ['Introduction to Stem', 'Introduction to Networking'];
-    document.getElementById('quickstart-button').textContent = 'Sign out';
+    //document.getElementsByClassName("quickstart-user-details-container")[0].style.visibility = "visible";
+    document.getElementById('sign-in-button').textContent = 'Sign out';
     loadUserData(user.uid);
     document.getElementById('majorList').addEventListener("change", function(){
         updateMajor();
     });
     //added
-    document.getElementById('Submit').addEventListener("click", function(){
-        updateCourses();
-    });
+    //document.getElementById('Submit').addEventListener("click", function(){
+    //    updateCourses();
+    //});
 }
 
 function loadUserData(userId) {
+    console.log("User: " + userId + " is signed in");
     var ref = firebase.database().ref('users/' + userId);
     ref.on('value', function (snapshot) {
         if (snapshot.val() != null) {

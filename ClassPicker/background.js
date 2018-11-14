@@ -1,5 +1,5 @@
 chrome.browserAction.onClicked.addListener(function () {
-  chrome.tabs.create({ url: chrome.runtime.getURL("credentials.html") });
+  chrome.tabs.create({ url: chrome.runtime.getURL("html/mainpage.html") });
 });
 // Initialize Firebase
 var config = {
