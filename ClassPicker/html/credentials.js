@@ -130,8 +130,9 @@ function checkClasses(classList, major) {
         while (j < numOfClasses) {
             var classes = document.getElementById(major).children[i].children[j];
             if (classes.value == classList[k]) {
-                classes.checked = "true";
                 k++;
+            } else {
+                classes.checked = "true";
             }
             j += 2;
         }
