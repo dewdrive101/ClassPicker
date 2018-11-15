@@ -65,6 +65,7 @@ function loadUserData(userId) {
     ref.on('value', function (snapshot) {
         if (snapshot.val() != null) {
             document.getElementById('majorList').value = (snapshot.val().major);
+            showCourses(snapshot.val().major);
         } else {
             console.log("Snapshot null");
         }
@@ -78,8 +79,6 @@ function updateMajor() {
     database.ref('users/' + user.uid).set({
         major: document.getElementById('majorList').value
     });
-    console.log("Changing visibility");
-    document.getElementById("computer_science_catalog").style.visibility = "visible";
 }
 
 
@@ -100,6 +99,11 @@ function updateCourses(){
             Classes: document.querySelectorAll("input[type='checkbox']")[i].value
         });
     }
+}
+
+function showCourses(major){
+    console.log("Changing visibility");
+    document.getElementById(major).style.visibility = "visible";
 }
 
 
