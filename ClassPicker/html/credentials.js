@@ -138,22 +138,22 @@ function showCourses(major) {
     document.getElementById(major).style.visibility = "visible";
 }
 function checkClasses(classList, major) {
-    var i = 1, j = 0;
+    var i = 1, j = 0, k = 0;
     var lengthClass = classList.length;
     var groups = document.getElementById(major).children;
     var length = groups.length - 1;
-    for (k = 0; k < lengthClass; k++) {
-        while (i < length) {
-            var numOfClasses = groups[i].children.length;
-            while (j < numOfClasses) {
-                var classes = document.getElementById(major).children[i].children[j];
-                console.log(classList[k]);
-                if (classes.value == classList[k])
-                    classes.checked = "true";
-                j += 2;
+    while (i < length) {
+        var numOfClasses = groups[i].children.length;
+        while (j < numOfClasses) {
+            var classes = document.getElementById(major).children[i].children[j];
+            console.log(classList[k]);
+            if (classes.value == classList[k]) {
+                classes.checked = "true";
+                k++;
             }
-            i += 2;
+            j += 2;
         }
+        i += 2;
     }
 }
 
