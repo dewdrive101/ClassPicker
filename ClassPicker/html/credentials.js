@@ -97,15 +97,18 @@ function updateCourses() {
     var length = groups.length - 1;
     while (i < length) {
         var numOfClasses = groups[i].children.length;
+        j = 0;
+        //console.log(numOfClasses);
         while (j < numOfClasses) {
             var classes = document.getElementById(major).children[i].children[j];
-            if (classes.checked)
+            if (!classes.checked)
                 classArray.push(classes.value);
             j += 2;
         }
         i += 2;
     }
     var user = firebase.auth().currentUser;
+    console.log(user.uid + "firebase ID");
     database.ref('users/' + user.uid).set({
         classes: classArray,
         major: major
@@ -116,16 +119,16 @@ function showCourses(major) {
     console.log("Changing visibility of " + major);
     document.getElementById(major).style.visibility = "visible";
 }
+
 function checkClasses(classList, major) {
     var i = 1, j = 0, k = 0;
     var groups = document.getElementById(major).children;
     var length = groups.length - 1;
     while (i < length) {
-        console.log(groups[i]);
         var numOfClasses = groups[i].children.length;
+        j = 0;
         while (j < numOfClasses) {
             var classes = document.getElementById(major).children[i].children[j];
-            console.log(classList[k]);
             if (classes.value == classList[k]) {
                 classes.checked = "true";
                 k++;
