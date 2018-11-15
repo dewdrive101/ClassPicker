@@ -10,6 +10,9 @@ function initApp() {
     //document.getElementById("majorSelection").style.visibility = "hidden";
     console.log("Initializing mainpage");
     firebase.auth().onAuthStateChanged(function (user) {
+        document.getElementById("None").style.visibility = "hidden";
+        document.getElementById("Computer Science").style.visibility = "hidden";
+        document.getElementById("Engineer").style.visibility = "hidden";
         if (user) {
             loggedIn(user);
         } else {
@@ -47,16 +50,14 @@ function startSignIn() {
 }
 
 function loggedIn(user) {
-    //document.getElementsByClassName("quickstart-user-details-container")[0].style.visibility = "visible";
     document.getElementById('sign-in-button').textContent = 'Sign out';
     loadUserData(user.uid);
-    document.getElementById('majorList').addEventListener("change", function(){
+    document.getElementById('majorList').addEventListener("change", function () {
         updateMajor();
     });
-    //added
-    //document.getElementById('Submit').addEventListener("click", function(){
-    //    updateCourses();
-    //});
+    document.getElementById('submit').addEventListener("click", function () {
+        updateCourses();
+    });
 }
 
 function loadUserData(userId) {
@@ -66,6 +67,8 @@ function loadUserData(userId) {
         if (snapshot.val() != null) {
             document.getElementById('majorList').value = (snapshot.val().major);
             showCourses(snapshot.val().major);
+            if (snapshot.val().classes != null)
+                checkClasses(snapshot.val().classes, snapshot.val().major);
         } else {
             console.log("Snapshot null");
         }
@@ -73,19 +76,47 @@ function loadUserData(userId) {
 }
 
 function updateMajor() {
-    //make the majors class visible so the user can pick the classes they've completed
+    var major = document.getElementById('majorList').value;
+    document.getElementById("None").style.visibility = "hidden";
+    document.getElementById("Computer Science").style.visibility = "hidden";
+    document.getElementById("Engineer").style.visibility = "hidden";
+    showCourses(major);
     console.log("Saving information");
     var user = firebase.auth().currentUser;
     database.ref('users/' + user.uid).set({
-        major: document.getElementById('majorList').value
+        major: major
     });
 }
 
+function updateCourses() {
+    console.log("saving user data");
+    var i = 1, j = 0;
+    var classArray = [];
+    var major = document.getElementById('majorList').value;
+    var groups = document.getElementById(major).children;
+    var length = groups.length - 1;
+    while (i < length) {
+        var numOfClasses = groups[i].children.length;
+        while (j < numOfClasses) {
+            var classes = document.getElementById(major).children[i].children[j];
+            if (classes.checked)
+                classArray.push(classes.value);
+            j += 2;
+        }
+        i += 2;
+    }
+    var user = firebase.auth().currentUser;
+    database.ref('users/' + user.uid).set({
+        classes: classArray,
+        major: major
+    });
+}
 
+/*
 function updateCourses(){
     var count = 0;
     var inputElements = document.getElementsByTagName("input");
-    consol.log("saving user data")
+    console.log("saving user data");
     var user = firebase.auth().currentUser;
     
     for(var i = 0; i<inputElements; i++){
@@ -95,15 +126,35 @@ function updateCourses(){
     }
 
     for(var i = 0; i < count; i++){
+        console.log(document.querySelectorAll("input[type='checkbox']")[i].value);
         database.ref('users/' + user.uid + "Classes").set({
             Classes: document.querySelectorAll("input[type='checkbox']")[i].value
         });
     }
-}
+}*/
 
-function showCourses(major){
-    console.log("Changing visibility");
+function showCourses(major) {
+    console.log("Changing visibility of " + major);
     document.getElementById(major).style.visibility = "visible";
+}
+function checkClasses(classList, major) {
+    var i = 1, j = 0;
+    var lengthClass = classList.length;
+    var groups = document.getElementById(major).children;
+    var length = groups.length - 1;
+    for (k = 0; k < lengthClass; k++) {
+        while (i < length) {
+            var numOfClasses = groups[i].children.length;
+            while (j < numOfClasses) {
+                var classes = document.getElementById(major).children[i].children[j];
+                console.log(classList[k]);
+                if (classes.value == classList[k])
+                    classes.checked = "true";
+                j += 2;
+            }
+            i += 2;
+        }
+    }
 }
 
 

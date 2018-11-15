@@ -83,143 +83,189 @@
 			</button>
 		</div>
 
+		<button id="sign-in-button">Sign-in with Google</button>
 		<div id="logIn">
 			<h2>Please Login to the left</h2>
-			<div id="majorSelection">
-				<select id="majorList">
-					<option value="Nothing" selected:true>Pick a Major</option>
-					<option value="Computer Science">Computer Science</option>
-					<option value="Engineer">Engineer</option>
-				</select>
-				<div id="Computer Science">
-					<form method="get">
-						<p>Freshman </p>
-						<p>Semester 1 </p>
-						<input type="checkbox" name="class" value="SLS|1106"> Academic and Professional Skills<br>
-						<input type="checkbox" name="class" value="IDS|1380"> Introduction to Stem<br>
-						<input type="checkbox" name="class" value="ENC|1101"> English Composition 1 <br>
-						<input type="checkbox" name="class" value="MAC|2311"> Analytic Geometry and Calculus 1<br>
-						<p> </p>
-						<input type="checkbox" name="class" value="BSC|1010"> Biology 1<br>
-						<input type="checkbox" name="class" value="BSC|1010L"> Biology 1 Laboratory <br>
-						<p> or </p>
-						<input type="checkbox" name="class" value="CHM|2045"> Chemistry 1 <br>
-						<input type="checkbox" name="class" value="CHM|2045L"> Chemistry 1 Laboratory<br>
-						<p>Semester 2</p>
-						<input type="checkbox" name="class" value="EGN|1007C"> Concepts and Methods For Engineering and Computer Science<br>
-						<input type="checkbox" name="class" value="PHY|2048"> Physics<br>
-						<input type="checkbox" name="class" value="PHY|2048L"> Physics <br>
-						<input type="checkbox" name="class" value="COP|2271C"> Introduction to Computation and Programming<br>
-						<input type="checkbox" name="class" value="ENC|2210"> Technical Writing<br>
-						<input type="checkbox" name="class" value="MAC|2312"> Analytic Geometry and Calculus 1<br>
-						<p>Sophomore </p>
-						<p>Semester 1 </p>
-						<input type="checkbox" name="class" value="PHY|2049"> Physics 2<br>
-						<input type="checkbox" name="class" value="PHY|2049L"> Physics 2 Laboratory<br>
-						<input type="checkbox" name="class" value="MAD|2104"> Discrete Math<br>
-						<input type="checkbox" name="class" value="COP|2272C"> Computer Programming 1 <br>
-						<input type="checkbox" name="class" value="MAS|3114"> Computational Linear Algebra<br>
-						<input type="checkbox" name="class" value="COP|3353C"> Introduction to Unix <br>
-
-
-
-						<p>Junior</p>
-						<p>Semester 1</p>
-						<input type="checkbox" name="class" value="CNT|3004C"> Inroduction to Computer Networks<br>
-						<input type="checkbox" name="class" value="COP|4415"> Data Structures<br>
-						<input type="checkbox" name="class" value="COP|4531"> Algorithem Design & Analysis<br>
-						<p>Make sure to check off a humanities course</p>
-						<input type="checkbox" name="class" value="IDS|4941"> Professional Experience Internship<br>
-						<p>And</p>
-						<input type="checkbox" name="class" value="MAP|2302"> Differential Equations<br>
-						<p>OR</p>
-						<input type="checkbox" name="class" value="MAD|3401"> Numerical Analysis<br>
-						<p>Semester 2</p>
-						<input type="checkbox" name="class" value="CEN|4010"> Software Engineering<br>
-						<input type="checkbox" name="class" value="CAP|4630"> Artificial Intelligence<br>
-						<input type="checkbox" name="class" value="EEL|4768C"> Computer Architecture and Organization<br>
-						<p>Computer science Concentration (make sure you check that off!)</p>
-						<p>Computer science elective(Make sure to check that off!)</p>
-						<p>Senior Year</p>
-						<p>Semester 1</p>
-						<input type="checkbox" name="class" value="COP|4610"> Operating System Concepts<br>
-						<input type="checkbox" name="class" value="COP|4934C"> Senior Design 1<br>
-						<p>Computer science Concentration X2(check it off)</p>
-						<p>Semester 2</p>
-						<input type="checkbox" name="class" value="IDS|2144"> Legal, Ethical, and Management Issues in Technology<br>
-						<input type="checkbox" name="class" value="COP|4020"> Programming Languages<br>
-						<input type="checkbox" name="class" value="COP|4935C"> Senior Design 2<br>
-						<p>Computer science concentration</p>
-						<p>An Art & Humanities or Social Science Course</p>
-
-						<p>Concentrations</p>
-						<p>Game Development & Simulation</p>
-						<input type="checkbox" name="class" value="CAP|4730"> Computer Graphics<br>
-						<input type="checkbox" name="class" value="CAP|4052"> Game Design and Development 1<br>
-						<input type="checkbox" name="class" value="CAP|4034"> Computer Animation<br>
-						<input type="checkbox" name="class" value="CAP|4056"> Game Design and Development 2<br>
-						<p>Information Assurance & Cyber-Security</p>
-						<input type="checkbox" name="class" value="CIS|4362"> Applied Cryptography<br>
-						<input type="checkbox" name="class" value="CIS|4367"> Computer Security<br>
-						<input type="checkbox" name="class" value="CIS|4203"> Digital Forensics<br>
-						<input type="checkbox" name="class" value="CIS|4204"> Ethical Hacking<br>
-						<p>Software Engineering</p>
-						<input type="checkbox" name="class" value="CEN|4073"> Software Requirements Engineering<br>
-						<input type="checkbox" name="class" value="CEN|4065"> Software Design and Architecture<br>
-						<input type="checkbox" name="class" value="CEN|4070"> Software Verification and Quality Assurance<br>
-						<input type="checkbox" name="class" value="CEN|4724"> User Interface and User Experience<br>
-						<p>Computer Science Electives</p>
-						<input type="checkbox" name="class" value="COP|2034C"> Introduction to Programming Using Python<br>
-						<input type="checkbox" name="class" value="COP|3834C"> Web Application Development<br>
-						<input type="checkbox" name="class" value="COP|4520"> Introduction to Parallel and Distributed<br>
-						<input type="checkbox" name="class" value="COP|4620"> Compilers and Interpreters<br>
-						<input type="checkbox" name="class" value="COP|4656"> Mobile Device Applications<br>
-						<input type="checkbox" name="class" value="COP|4930"> Special Topics<br>
-						<input type="checkbox" name="class" value="CAP|4122"> Virtual Reality<br>
-						<input type="checkbox" name="class" value="CAP|4410"> Computer Vision<br>
-						<input type="checkbox" name="class" value="CAP|4612"> Machine Learning<br>
-						<input type="checkbox" name="class" value="CAP|4830"> Modeling and Simulation<br>
-						<input type="checkbox" name="class" value="CEN|4088"> Software Security Testing<br>
-						<input type="checkbox" name="class" value="CEN|4213"> Embedded Systems Programming<br>
-						<input type="checkbox" name="class" value="CEN|4721"> Human Computer Interaction<br>
-						<input type="checkbox" name="class" value="CNT|4409"> Network Security<br>
-						<input type="checkbox" name="class" value="CNT|4526"> Wireless and Mobile Networking<br>
-						<input type="checkbox" name="class" value="CIS|4369"> Web Application Security<br>
-						<input type="checkbox" name="class" value="EEL|4664C"> Autonomous Robotic Systems<br>
-						<p>Arts, Humanities, and Social Sciences</p>
-						<p>Arts and Humanities</p>
-						<input type="checkbox" name="class" value="ARH|2000"> Art Appreciation<br>
-						<input type="checkbox" name="class" value="HUM|2020"> Introduction to the Humanities<br>
-						<input type="checkbox" name="class" value="PHI|2010"> Introduction to Philosophy<br>
-						<input type="checkbox" name="class" value="HUM|2022"> Software Security Testing<br>
-						<p>Social Sciences</p>
-						<input type="checkbox" name="class" value="AMH|2020"> American History Since 1877<br>
-						<input type="checkbox" name="class" value="PSY|2012"> General Psychology<br>
-						<input type="checkbox" name="class" value="ECO|2013"> Principles of Macroeconomics<br>
-						<input type="checkbox" name="class" value="AMH|2020"> American History to 1877<br>
-						<input type="checkbox" name="class" value="EC)|2023"> American History to 1877<br>
-						<input type="checkbox" name="class" value="AMH|2930"> Special Topics<br>
-
-						<input type="submit" value="Submit">
-					</form>
+		</div>
+		<div id="majorSelection">
+			<select id="majorList">
+				<option value="None" selected:true>Pick a Major</option>
+				<option value="Computer Science">Computer Science</option>
+				<option value="Engineer">Engineer</option>
+			</select>
+			<div id="None" visibility:hidden>
+				<p>Please select a major.</p>
+			</div>
+			<div id="Computer Science" visibility:hidden>
+				<div>
+					<p>Computer Science</p>
+					<p>Freshman </p>
+					<p>Semester 1 </p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="SLS|1106"> Academic and Professional Skills<br>
+					<input type="checkbox" name="class" value="IDS|1380"> Introduction to Stem<br>
+					<input type="checkbox" name="class" value="ENC|1101"> English Composition 1<br>
+					<input type="checkbox" name="class" value="MAC|2311"> Analytic Geometry and Calculus 1<br>
+					<input type="checkbox" name="class" value="BSC|1010"> Biology 1<br>
+					<input type="checkbox" name="class" value="BSC|1010L"> Biology 1 Laboratory<br>
+					<input type="checkbox" name="class" value="CHM|2045"> Chemistry 1<br>
+					<input type="checkbox" name="class" value="CHM|2045L"> Chemistry 1 Laboratory<br>
+				</div>
+				<div>
+					<p>Semester 2</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="EGN|1007C"> Concepts and Methods For Engineering and Computer Science<br>
+					<input type="checkbox" name="class" value="PHY|2048"> Physics<br>
+					<input type="checkbox" name="class" value="PHY|2048L"> Physics Laboratory<br>
+					<input type="checkbox" name="class" value="COP|2271C"> Introduction to Computation and Programming<br>
+					<input type="checkbox" name="class" value="ENC|2210"> Technical Writing<br>
+					<input type="checkbox" name="class" value="MAC|2312"> Analytic Geometry and Calculus 1<br>
+				</div>
+				<div>
+					<p>Sophomore </p>
+					<p>Semester 1 </p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="PHY|2049"> Physics 2<br>
+					<input type="checkbox" name="class" value="PHY|2049L"> Physics 2 Laboratory<br>
+					<input type="checkbox" name="class" value="MAD|2104"> Discrete Math<br>
+					<input type="checkbox" name="class" value="COP|2272C"> Computer Programming 1 <br>
+					<input type="checkbox" name="class" value="MAS|3114"> Computational Linear Algebra<br>
+					<input type="checkbox" name="class" value="COP|3353C"> Introduction to Unix <br>
+				</div>
+				<div>
+					<p>Junior</p>
+					<p>Semester 1</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="CNT|3004C"> Inroduction to Computer Networks<br>
+					<input type="checkbox" name="class" value="COP|4415"> Data Structures<br>
+					<input type="checkbox" name="class" value="COP|4531"> Algorithem Design & Analysis<br>
+					<p>Make sure to check off a humanities course</p>
+					<input type="checkbox" name="class" value="IDS|4941"> Professional Experience Internship<br>
+					<p>And</p>
+					<input type="checkbox" name="class" value="MAP|2302"> Differential Equations<br>
+					<p>OR</p>
+					<input type="checkbox" name="class" value="MAD|3401"> Numerical Analysis<br>
+				</div>
+				<div>
+					<p>Semester 2</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="CEN|4010"> Software Engineering<br>
+					<input type="checkbox" name="class" value="CAP|4630"> Artificial Intelligence<br>
+					<input type="checkbox" name="class" value="EEL|4768C"> Computer Architecture and Organization<br>
+					<p>Computer science Concentration (make sure you check that off!)</p>
+					<p>Computer science elective(Make sure to check that off!)</p>
+				</div>
+				<div>
+					<p>Senior Year</p>
+					<p>Semester 1</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="COP|4610"> Operating System Concepts<br>
+					<input type="checkbox" name="class" value="COP|4934C"> Senior Design 1<br>
+					<p>Computer science Concentration X2(check it off)</p>
+				</div>
+				<div>
+					<p>Semester 2</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="IDS|2144"> Legal, Ethical, and Management Issues in Technology<br>
+					<input type="checkbox" name="class" value="COP|4020"> Programming Languages<br>
+					<input type="checkbox" name="class" value="COP|4935C"> Senior Design 2<br>
+					<p>Computer science concentration</p>
+					<p>An Art & Humanities or Social Science Course</p>
+				</div>
+				<div>
+					<p>Concentrations</p>
+					<p>Game Development & Simulation</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="CAP|4730"> Computer Graphics<input>
+					<input type="checkbox" name="class" value="CAP|4052"> Game Design and Development 1<br>
+					<input type="checkbox" name="class" value="CAP|4034"> Computer Animation<br>
+					<input type="checkbox" name="class" value="CAP|4056"> Game Design and Development 2<br>
+				</div>
+				<div>
+					<p>Information Assurance & Cyber-Security</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="CIS|4362"> Applied Cryptography<br>
+					<input type="checkbox" name="class" value="CIS|4367"> Computer Security<br>
+					<input type="checkbox" name="class" value="CIS|4203"> Digital Forensics<br>
+					<input type="checkbox" name="class" value="CIS|4204"> Ethical Hacking<br>
+				</div>
+				<div>
+					<p>Software Engineering</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="CEN|4073"> Software Requirements Engineering<br>
+					<input type="checkbox" name="class" value="CEN|4065"> Software Design and Architecture<br>
+					<input type="checkbox" name="class" value="CEN|4070"> Software Verification and Quality Assurance<br>
+					<input type="checkbox" name="class" value="CEN|4724"> User Interface and User Experience<br>
+				</div>
+				<div>
+					<p>Computer Science Electives</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="COP|2034C"> Introduction to Programming Using Python<br>
+					<input type="checkbox" name="class" value="COP|3834C"> Web Application Development<br>
+					<input type="checkbox" name="class" value="COP|4520"> Introduction to Parallel and Distributed<br>
+					<input type="checkbox" name="class" value="COP|4620"> Compilers and Interpreters<br>
+					<input type="checkbox" name="class" value="COP|4656"> Mobile Device Applications<br>
+					<input type="checkbox" name="class" value="COP|4930"> Special Topics<br>
+					<input type="checkbox" name="class" value="CAP|4122"> Virtual Reality<br>
+					<input type="checkbox" name="class" value="CAP|4410"> Computer Vision<br>
+					<input type="checkbox" name="class" value="CAP|4612"> Machine Learning<br>
+					<input type="checkbox" name="class" value="CAP|4830"> Modeling and Simulation<br>
+					<input type="checkbox" name="class" value="CEN|4088"> Software Security Testing<br>
+					<input type="checkbox" name="class" value="CEN|4213"> Embedded Systems Programming<br>
+					<input type="checkbox" name="class" value="CEN|4721"> Human Computer Interaction<br>
+					<input type="checkbox" name="class" value="CNT|4409"> Network Security<br>
+					<input type="checkbox" name="class" value="CNT|4526"> Wireless and Mobile Networking<br>
+					<input type="checkbox" name="class" value="CIS|4369"> Web Application Security<br>
+					<input type="checkbox" name="class" value="EEL|4664C"> Autonomous Robotic Systems<br>
+				</div>
+				<div>
+					<p>Arts, Humanities, and Social Sciences</p>
+					<p>Arts and Humanities</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="ARH|2000"> Art Appreciation<br>
+					<input type="checkbox" name="class" value="HUM|2020"> Introduction to the Humanities<br>
+					<input type="checkbox" name="class" value="PHI|2010"> Introduction to Philosophy<br>
+					<input type="checkbox" name="class" value="HUM|2022"> Software Security Testing<br>
+				</div>
+				<div>
+					<p>Social Sciences</p>
+				</div>
+				<div>
+					<input type="checkbox" name="class" value="AMH|2020"> American History Since 1877<br>
+					<input type="checkbox" name="class" value="PSY|2012"> General Psychology<br>
+					<input type="checkbox" name="class" value="ECO|2013"> Principles of Macroeconomics<br>
+					<input type="checkbox" name="class" value="AMH|2020"> American History to 1877<br>
+					<input type="checkbox" name="class" value="EC)|2023"> American History to 1877<br>
+					<input type="checkbox" name="class" value="AMH|2930"> Special Topics<br>
 				</div>
 
-
-
+					<button id="submit">Submit</button>
+				</div>
+				<div id="Engineer" visibility:hidden>
+					<form method="get">
+						<p>Engineer</p>
+					</form>
+				</div>
+				<div class="Side Bar">
+					Additional Info
+					whatever other stuff you want lemme know
+				</div>
+				<div class="footer">
+					Software Engineering Project
+				</div>
 			</div>
-
-			<button id="sign-in-button">Sign-in with Google</button>
-
-			<div class="Side Bar">
-				Additional Info
-				whatever other stuff you want lemme know
-			</div>
-			<div class="footer">
-				Software Engineering Project
-			</div>
-
-
-		</div>
 </body>
 
 </html>
