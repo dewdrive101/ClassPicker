@@ -12,7 +12,16 @@
   },
   "browser_action": {
     "default_icon": "icons/icon.png"
-  },
+  },  "content_scripts": [
+    {
+      "matches": [
+        "https://floridapoly.collegescheduler.com/accessible/courses/add"
+      ],
+      "js": [
+        "wizardAdd.js"
+      ]
+    }
+  ],
   "permissions": [
     "identity",
     "activeTab",

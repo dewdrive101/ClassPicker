@@ -7,14 +7,28 @@ var config = {
   databaseURL: "https://class-picker-f30b8.firebaseio.com",
   storageBucket: "class-picker.appspot.com",
 };
+var userid;
 firebase.initializeApp(config);
 function initApp() {
   firebase.auth().onAuthStateChanged(function (user) {
-    console.log('Logged in/out:', user);
+    userid = user.uid;
   });
 }
 
-var i;
+chrome.runtime.onConnect.addListener(function (port) {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      console.log(user.uid);
+    }
+  });
+  console.assert(port.name == "classList");
+  port.onMessage.addListener(function (message) {
+    var ref = firebase.database().ref('users');
+    ref.child(userid + '/classes').once('value', function (snapshot) {
+      port.postMessage({ classList: snapshot.val() });
+    });
+  });
+});
 
 window.onload = function () {
   initApp();
