@@ -112,37 +112,16 @@ function updateCourses() {
     });
 }
 
-/*
-function updateCourses(){
-    var count = 0;
-    var inputElements = document.getElementsByTagName("input");
-    console.log("saving user data");
-    var user = firebase.auth().currentUser;
-    
-    for(var i = 0; i<inputElements; i++){
-        if(inputElements[i].type === "checkbox"){
-            count++;
-        }
-    }
-
-    for(var i = 0; i < count; i++){
-        console.log(document.querySelectorAll("input[type='checkbox']")[i].value);
-        database.ref('users/' + user.uid + "Classes").set({
-            Classes: document.querySelectorAll("input[type='checkbox']")[i].value
-        });
-    }
-}*/
-
 function showCourses(major) {
     console.log("Changing visibility of " + major);
     document.getElementById(major).style.visibility = "visible";
 }
 function checkClasses(classList, major) {
     var i = 1, j = 0, k = 0;
-    var lengthClass = classList.length;
     var groups = document.getElementById(major).children;
     var length = groups.length - 1;
     while (i < length) {
+        console.log(groups[i]);
         var numOfClasses = groups[i].children.length;
         while (j < numOfClasses) {
             var classes = document.getElementById(major).children[i].children[j];
