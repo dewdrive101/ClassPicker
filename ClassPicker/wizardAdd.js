@@ -13,6 +13,8 @@ function addClasses() {
         var classList = response.classList;
         console.log(classList);
         var length = classList.length;
+        if (length > 5)
+            length = 5;
         addClass(classList, 0, length);
     });
 }
