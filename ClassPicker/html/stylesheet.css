@@ -58,7 +58,8 @@
 }
 .content
 {
-	min-height:400px;
+	min-width: width 100px;
+	min-height: height 1000px;
 	background:lightgray;
 	width:1080px;
 	float:right;
