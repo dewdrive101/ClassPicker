@@ -90,7 +90,7 @@ function updateMajor() {
 
 function updateCourses() {
     console.log("saving user data");
-    var i = 1, j = 0;
+    var i = 2, j = 0;
     var classArray = [];
     var major = document.getElementById('majorList').value;
     var groups = document.getElementById(major).children;
@@ -121,7 +121,7 @@ function showCourses(major) {
 }
 
 function checkClasses(classList, major) {
-    var i = 1, j = 0, k = 0;
+    var i = 2, j = 0, k = 0;
     var groups = document.getElementById(major).children;
     var length = groups.length - 1;
     while (i < length) {
