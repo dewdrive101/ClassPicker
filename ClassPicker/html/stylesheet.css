@@ -1,5 +1,6 @@
 .wrapper{
-	width:1300px;
+	width:1400px;
+	height: 1500px;
 	background:#eee;
 	margin: 0 auto 0 auto;
 
@@ -59,8 +60,8 @@
 .content
 {
 	min-width: width 100px;
-	min-height: height 1000px;
 	background:lightgray;
+	height: 5000px;
 	width:1080px;
 	float:right;
 
