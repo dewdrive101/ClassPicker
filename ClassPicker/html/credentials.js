@@ -58,6 +58,9 @@ function loggedIn(user) {
     document.getElementById('submit').addEventListener("click", function () {
         updateCourses();
     });
+    document.getElementById("TheWiz").addEventListener("click", function () {
+        loadThewiz();
+    });
 }
 
 function loadUserData(userId) {
@@ -113,7 +116,11 @@ function updateCourses() {
         classes: classArray,
         major: major
     });
+    document.getElementById("submit_confirm").style.visibility = "visible";
+    document.getElementById("TheWiz").style.visibility = "visible";
 }
+
+
 
 function showCourses(major) {
     console.log("Changing visibility of " + major);
@@ -140,6 +147,9 @@ function checkClasses(classList, major) {
     }
 }
 
+function loadThewiz() {
+    window.open('https://floridapoly.collegescheduler.com/accessible/courses/add', '_blank');
+}
 
 window.onload = function () {
     initApp();
