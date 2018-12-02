@@ -1,3 +1,4 @@
+//when the browser icon is clicked, open mainpage.html
 chrome.browserAction.onClicked.addListener(function () {
   chrome.tabs.create({ url: chrome.runtime.getURL("html/mainpage.html") });
 });
@@ -15,12 +16,19 @@ function initApp() {
   });
 }
 
+//listener for users logging in
 chrome.runtime.onConnect.addListener(function (port) {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       console.log(user.uid);
     }
   });
+
+/*
+a port for listening from mainpage.js,
+input: user uid
+output: user classes to be taken
+*/
   console.assert(port.name == "classList");
   port.onMessage.addListener(function (message) {
     var ref = firebase.database().ref('users');

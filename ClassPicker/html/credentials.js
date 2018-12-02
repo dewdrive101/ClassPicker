@@ -1,3 +1,7 @@
+//This javascript is the javascript for mainpage.html
+//it controls logging in, saving class information, and helpful links
+
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCXUZDgzBdjdVPmuLV74aNbIu4KkfAJOZM",
@@ -6,24 +10,25 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.database();
+//initiliazes the page, figures out if the user is new, logs in for previous users, adds listeners to buttons
 function initApp() {
-    //document.getElementById("majorSelection").style.visibility = "hidden";
     console.log("Initializing mainpage");
     firebase.auth().onAuthStateChanged(function (user) {
-        document.getElementById("None").style.visibility = "hidden";
-        document.getElementById("Computer Science").style.visibility = "hidden";
-        document.getElementById("Engineer").style.visibility = "hidden";
+        hideEverything();
         if (user) {
             loggedIn(user);
         } else {
             document.getElementById('sign-in-button').textContent = 'Sign-in with Google';
-            //document.getElementsByClassName("logIn").style.visibility = "hidden";
         }
         document.getElementById('sign-in-button').disabled = false;
     });
     document.getElementById('sign-in-button').addEventListener('click', startSignIn, false);
 }
-
+/*
+gets authentication tokens and signs in user
+input: boolean
+output: signed in
+*/
 function startAuth(interactive) {
     chrome.identity.getAuthToken({ 'interactive': true }, function (token) {
         if (token) {
@@ -39,6 +44,7 @@ function startAuth(interactive) {
     });
 }
 
+//signs in or out based on current status
 function startSignIn() {
     console.log("Starting sign in");
     document.getElementById('sign-in-button').disabled = true;
@@ -49,6 +55,11 @@ function startSignIn() {
     }
 }
 
+/*
+adds listeners to the rest of the buttons on the page, loads user info
+input: user
+output: null
+*/
 function loggedIn(user) {
     document.getElementById('sign-in-button').textContent = 'Sign out';
     loadUserData(user.uid);
@@ -63,6 +74,11 @@ function loggedIn(user) {
     });
 }
 
+/*
+loads information from firebase; major and previously selected classes
+input: user id
+output: null
+*/
 function loadUserData(userId) {
     console.log("User: " + userId + " is signed in");
     var ref = firebase.database().ref('users/' + userId);
@@ -78,11 +94,10 @@ function loadUserData(userId) {
     });
 }
 
+//updates when the major selection is changed, calls showCourses next, saves major to firebase
 function updateMajor() {
     var major = document.getElementById('majorList').value;
-    document.getElementById("None").style.visibility = "hidden";
-    document.getElementById("Computer Science").style.visibility = "hidden";
-    document.getElementById("Engineer").style.visibility = "hidden";
+    hideEverything();
     showCourses(major);
     console.log("Saving information");
     var user = firebase.auth().currentUser;
@@ -91,6 +106,10 @@ function updateMajor() {
     });
 }
 
+/*
+called when submit button is clicked
+gathers all of the unchecked classes and saves them to firebase in that order
+*/
 function updateCourses() {
     console.log("saving user data");
     var i = 2, j = 0;
@@ -101,7 +120,6 @@ function updateCourses() {
     while (i < length) {
         var numOfClasses = groups[i].children.length;
         j = 0;
-        //console.log(numOfClasses);
         while (j < numOfClasses) {
             var classes = document.getElementById(major).children[i].children[j];
             if (!classes.checked)
@@ -120,13 +138,21 @@ function updateCourses() {
     document.getElementById("TheWiz").style.visibility = "visible";
 }
 
-
-
+/*
+shows courses for selected major
+input: major
+output: visible div
+*/
 function showCourses(major) {
     console.log("Changing visibility of " + major);
     document.getElementById(major).style.visibility = "visible";
 }
 
+/*
+on login, checks firebase for saved information and checks every class not on firebase
+input: list of classes from firebase, major saved in firebase
+output: correctly checked boxes
+*/
 function checkClasses(classList, major) {
     var i = 2, j = 0, k = 0;
     var groups = document.getElementById(major).children;
@@ -145,6 +171,13 @@ function checkClasses(classList, major) {
         }
         i += 2;
     }
+}
+
+//hides the various divs
+function hideEverything(){
+    document.getElementById("None").style.visibility = "hidden";
+    document.getElementById("Computer Science").style.visibility = "hidden";
+    document.getElementById("Engineer").style.visibility = "hidden";
 }
 
 function loadThewiz() {
