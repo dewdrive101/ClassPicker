@@ -1,7 +1,6 @@
 //This javascript is the javascript for mainpage.html
 //it controls logging in, saving class information, and helpful links
 
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCXUZDgzBdjdVPmuLV74aNbIu4KkfAJOZM",
@@ -99,7 +98,7 @@ function updateMajor() {
     var major = document.getElementById('majorList').value;
     hideEverything();
     showCourses(major);
-    console.log("Saving information");
+    console.log("Saving major: " + major);
     var user = firebase.auth().currentUser;
     database.ref('users/' + user.uid).set({
         major: major
@@ -129,7 +128,7 @@ function updateCourses() {
         i += 2;
     }
     var user = firebase.auth().currentUser;
-    console.log(user.uid + "firebase ID");
+    console.log(user.uid + "firebase ID, saving classes: " + classArray);
     database.ref('users/' + user.uid).set({
         classes: classArray,
         major: major
@@ -154,6 +153,7 @@ input: list of classes from firebase, major saved in firebase
 output: correctly checked boxes
 */
 function checkClasses(classList, major) {
+    console.log("Checking classes");
     var i = 2, j = 0, k = 0;
     var groups = document.getElementById(major).children;
     var length = groups.length - 1;
@@ -175,6 +175,7 @@ function checkClasses(classList, major) {
 
 //hides the various divs
 function hideEverything(){
+    console.log("Hiding everything");
     document.getElementById("None").style.visibility = "hidden";
     document.getElementById("Computer Science").style.visibility = "hidden";
     document.getElementById("Engineer").style.visibility = "hidden";

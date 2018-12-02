@@ -12,6 +12,7 @@ communicates with background.js,
 output: initiates addClass() recursive 
 */
 function addClasses() {
+    console.log("Getting classes");
     var port = chrome.runtime.connect({ name: "classList" });
     port.postMessage({ greeting: "classList" });
     port.onMessage.addListener(function (response) {
@@ -20,6 +21,7 @@ function addClasses() {
         var length = classList.length;
         if (length > 5)
             length = 5;
+        console.log("Classes: " + classList);
         addClass(classList, 0, length);
     });
 }
